@@ -65,11 +65,19 @@
       }
     </style>
 
+<<<<<<< HEAD
+<link href="../public/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../public/assets/css/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../public/assets/css/headers.css" rel="stylesheet">
+=======
 <link href="../../public/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="../../public/assets/css/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="../../public/assets/css/headers.css" rel="stylesheet">
+>>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
   </head>
   <body>
     
@@ -102,7 +110,11 @@
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+<<<<<<< HEAD
+          <img class="bi me-2" src="assets/images/grcxlk13.bmp" alt="logo" style="object-fit:cover; border-radius:10px;" width="60" height="60" role="img">
+=======
           <img class="bi me-2" src="../../public/assets/images/grcxlk13.bmp" alt="logo" style="object-fit:cover; border-radius:10px;" width="60" height="60" role="img">
+>>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -132,6 +144,26 @@
     </div>
   </header>
             <!-- Slider --> 
+<<<<<<< HEAD
+            <link rel="stylesheet" href="../public/assets/slider/ism/css/my-slider.css"/>
+            <script src="../public/assets/slider/ism/js/ism-2.2.min.js"></script>
+            <div class="ism-slider" data-transition_type="zoom" id="my-slider">
+            <ol>
+                <li>
+                <img src="../public/assets/slider/ism/image/slides/flower-729514_1280.jpg">
+                <div class="ism-caption ism-caption-0">My slide caption text</div>
+                </li>
+                <li>
+                <img src="../public/assets/slider/ism/image/slides/beautiful-701678_1280.jpg">
+                <div class="ism-caption ism-caption-0">My slide caption text</div>
+                </li>
+                <li>
+                <img src="../public/assets/slider/ism/image/slides/summer-192179_1280.jpg">
+                <div class="ism-caption ism-caption-0">My slide caption text</div>
+                </li>
+                <li>
+                <img src="../public/assets/slider/ism/image/slides/city-690332_1280.jpg">
+=======
             <link rel="stylesheet" href="../../public/assets/slider/ism/css/my-slider.css"/>
             <script src="../../public/assets/slider/ism/js/ism-2.2.min.js"></script>
             <div class="ism-slider" data-transition_type="zoom" id="my-slider">
@@ -150,6 +182,7 @@
                 </li>
                 <li>
                 <img src="../../public/assets/slider/ism/image/slides/city-690332_1280.jpg">
+>>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
                 <div class="ism-caption ism-caption-0">My slide caption text</div>
                 </li>
             </ol>
@@ -176,7 +209,11 @@
         </div>
         <div class="col-lg-6  col-md-12 d-lg-block">
           <!-- <svg class="bd-placeholder-img w-100" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+<<<<<<< HEAD
+          <img class="bd-placeholder-img w-100 img-fluid border rounded" src="../public/assets/images/parxwv4f.bmp" alt="" srcset="" width="200" height="250" ole="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+=======
           <img class="bd-placeholder-img w-100 img-fluid border rounded" src="../../public/assets/images/parxwv4f.bmp" alt="" srcset="" width="200" height="250" ole="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+>>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
         </div>
       </div>
     </div>
@@ -191,7 +228,11 @@
           <a href="#" class="stretched-link">Continue reading</a>
         </div>
         <div class="col-lg-6 col-md-12 d-lg-block">
+<<<<<<< HEAD
+        <img class="bd-placeholder-img w-100 img-fluid border rounded" src="../public/assets/images/z1c0zg7r.bmp" alt="" srcset="" width="200" height="250" ole="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+=======
         <img class="bd-placeholder-img w-100 img-fluid border rounded" src="../../public/assets/images/z1c0zg7r.bmp" alt="" srcset="" width="200" height="250" ole="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+>>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
         </div>
       </div>
     </div>
@@ -216,7 +257,11 @@
 
 </main>
 
+<<<<<<< HEAD
+    <script src="../public/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+=======
     <script src="../../public/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+>>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
 
   </body>
 </html>
