@@ -8,7 +8,11 @@
     <meta name="generator" content="William">
     <title>My Blog</title>
 
+<<<<<<< HEAD
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+=======
+    <link href="../../public/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+>>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
 
     <style>
       .bd-placeholder-img {
@@ -65,13 +69,21 @@
 
     
     <!-- Custom styles for this template -->
+<<<<<<< HEAD
     <link href="assets/css/sign-in.css" rel="stylesheet">
+=======
+    <link href="../../public/assets/css/sign-in.css" rel="stylesheet">
+>>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
   </head>
   <body class="text-center">
     
 <main class="form-signin w-100 m-auto">
   <form method="post">
+<<<<<<< HEAD
     <img class="mb-4 rounded-circle shadow" src="assets/images/grcxlk13.bmp" alt="" width="120" height="120">
+=======
+    <img class="mb-4 rounded-circle shadow" src="../../public/assets/images/grcxlk13.bmp" alt="" width="120" height="120">
+>>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
     <div class="form-floating">

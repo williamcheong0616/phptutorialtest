@@ -8,7 +8,11 @@
     <meta name="generator" content="William">
     <title>My Blog</title>
 
+<<<<<<< HEAD
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+=======
+    <link href="../../public/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+>>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
 
     <style>
       .bd-placeholder-img {
@@ -65,7 +69,11 @@
 
     
     <!-- Custom styles for this template -->
+<<<<<<< HEAD
     <link href="assets/css/sign-in.css" rel="stylesheet">
+=======
+    <link href="../../public/assets/css/sign-in.css" rel="stylesheet">
+>>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
   </head>
   <body class="text-center">
     

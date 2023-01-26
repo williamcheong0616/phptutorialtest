@@ -6,8 +6,13 @@
     <meta name="description" content="">
     <title>AdminHub - MyBlog</title>
 
+<<<<<<< HEAD
 <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="assets/css/bootstrap-icons.css" rel="stylesheet">
+=======
+<link href="../../public/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../public/assets/css/bootstrap-icons.css" rel="stylesheet">
+>>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
 
     <style>
       .bd-placeholder-img {
@@ -64,7 +69,11 @@
 
     
     <!-- Custom styles for this template -->
+<<<<<<< HEAD
     <link href="assets/css/dashboard.css" rel="stylesheet">
+=======
+    <link href="../../public/assets/css/dashboard.css" rel="stylesheet">
+>>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
   </head>
   <body>
     
@@ -140,9 +149,15 @@
       </div>
     </main>
 
+<<<<<<< HEAD
       <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <script src="assets/js/dashboard.js"></script>
+=======
+      <script src="../../public/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <script src="../../public/assets/js/dashboard.js"></script>
+>>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
 
    </body>
 </html>
