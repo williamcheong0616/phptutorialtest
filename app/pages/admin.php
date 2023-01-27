@@ -1,18 +1,96 @@
 <?php
 
-if(!logged_in()){
-  redirect('login');
-}
+      if(!logged_in()){
+        redirect('login');
+      }
 
-        
-$section = $url[1] ?? 'dashboard';
-$action  = $url[2] ?? 'view';
-$filename = "../app/pages/admin/".$section.".php";
-if(file_exists($filename)){
-  require_once $filename;
-}else{
- require_once "../app/pages/admin/404.php";
-}
+              
+      $section = $url[1] ?? 'dashboard';
+      $action  = $url[2] ?? 'view';
+      $filename = "../app/pages/admin/".$section.".php";
+      if(file_exists($filename)){
+        require_once $filename;
+      }else{
+        $filename = "../app/pages/admin/404.php";
+      }
+
+      if(!empty($_POST))
+      {
+                 if($action == 'add'){
+
+                  //validate
+                    $errors = [];
+                    
+                    //validate username
+                
+                    if(empty($_POST['username']))
+                    {
+                      $errors['username'] = 'Username is required';
+                    }
+                    elseif(preg_match("/^[a-zA-Z0-9]+$/", $_POST['username']) == 0)
+                    {
+                      $errors['username'] = 'Username can only contain letters and numbers';
+                    }
+                
+                    //validate email
+                
+                    if(empty($_POST['email']))
+                    {
+                      $errors['email'] = 'Email is required';
+                    }
+                    elseif(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) == false)
+                    {
+                      $errors['email'] = 'Email is invalid';
+                    }
+                    else
+                    {
+                      $query = "select * from users where email = :email";
+                      $data = ['email' => $_POST['email']];
+                      $result = query($query, $data);
+                      if($result)
+                      {
+                        $errors['email'] = 'Email is already taken';
+                      }
+                    }
+                    //validate password
+                    if(empty($_POST['password']))
+                    {
+                      $errors['password'] = 'Password is required';
+                    }
+                    elseif(strlen($_POST['password']) < 8)
+                    {
+                      $errors['password'] = 'Password must be at least 8 characters or more';
+                    }
+                
+                    //validate confirm password
+                    if(empty($_POST['password2']))
+                    {
+                      $errors['password2'] = 'Confirm password is required';
+                    }
+                      elseif($_POST['password'] != $_POST['password2'])
+                    {
+                      $errors['password2'] = 'Password does not match';
+                    }
+
+                    if(empty($errors))
+                    {
+                      //save to database
+                      $data = [];
+                      $data['username'] = $_POST['username'];
+                      $data['email'] = $_POST['email'];
+                      $data['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                      $data['role'] = 'user';
+                
+                      $query = "insert into users (username, email, password, role) values (:username, :email, :password, :role)";
+                      query($query, $data);
+                
+                      redirect('admin/users');
+                
+                
+                    }
+                  }
+
+      }
 
 ?>
 
@@ -164,6 +242,10 @@ if(file_exists($filename)){
           </button>
         </div>
       </div>
+
+      <?php
+        require_once $filename;
+      ?>
 
     </main>
 
