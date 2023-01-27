@@ -1,3 +1,85 @@
+<?php
+  if(!empty($_POST))
+  {
+   //validate
+    $errors = [];
+    
+    //validate username
+
+    if(empty($_POST['username']))
+    {
+      $errors['username'] = 'Username is required';
+    }
+    elseif(preg_match("/^[a-zA-Z0-9]+$/", $_POST['username']) == 0)
+    {
+      $errors['username'] = 'Username can only contain letters and numbers';
+    }
+
+    //validate email
+
+    if(empty($_POST['email']))
+    {
+      $errors['email'] = 'Email is required';
+    }
+    elseif(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) == false)
+    {
+      $errors['email'] = 'Email is invalid';
+    }
+    else
+    {
+      $query = "select * from users where email = :email";
+      $data = ['email' => $_POST['email']];
+      $result = query($query, $data);
+      if($result)
+      {
+        $errors['email'] = 'Email is already taken';
+      }
+    }
+    //validate password
+    if(empty($_POST['password']))
+    {
+      $errors['password'] = 'Password is required';
+    }
+    elseif(strlen($_POST['password']) < 8)
+    {
+      $errors['password'] = 'Password must be at least 8 characters or more';
+    }
+
+    //validate confirm password
+    if(empty($_POST['password2']))
+    {
+      $errors['password2'] = 'Confirm password is required';
+    }
+      elseif($_POST['password'] != $_POST['password2'])
+    {
+      $errors['password2'] = 'Password does not match';
+    }
+
+
+    if(empty($_POST['terms']))
+    {
+      $errors['terms'] = 'You must agree to the terms and conditions';
+    }
+
+    if(empty($errors))
+    {
+      //save to database
+      $data = [];
+      $data['username'] = $_POST['username'];
+      $data['email'] = $_POST['email'];
+      $data['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+      $data['role'] = 'user';
+
+      $query = "insert into users (username, email, password, role) values (:username, :email, :password, :role)";
+      query($query, $data);
+
+      redirect('login');
+
+
+    }
+  }
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,11 +90,7 @@
     <meta name="generator" content="William">
     <title>My Blog</title>
 
-<<<<<<< HEAD
-    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-=======
-    <link href="../../public/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
->>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
+    <link href="<?=ROOT?>/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -69,42 +147,57 @@
 
     
     <!-- Custom styles for this template -->
-<<<<<<< HEAD
-    <link href="assets/css/sign-in.css" rel="stylesheet">
-=======
-    <link href="../../public/assets/css/sign-in.css" rel="stylesheet">
->>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
+    <link href="<?=ROOT?>/assets/css/sign-in.css" rel="stylesheet">
   </head>
   <body class="text-center">
     
 <main class="form-signin w-100 m-auto">
   <form method="post">
-    <img class="mb-4 rounded-circle shadow" src="assets/images/grcxlk13.bmp" alt="" width="120" height="120">
+  <a href="home">
+    <img class="mb-4 rounded-circle shadow" src="<?=ROOT?>/assets/images/grcxlk13.bmp" alt="" width="120" height="120">
+    </a>
     <h1 class="h3 mb-3 fw-normal">Create An Account!</h1>
-
+    <?php if(!empty($errors)):?>
+      <div class="alert alert-danger">Please fix the error below</div>
+      <?php endif;?>
     <div class="form-floating">
-      <input name="username" type="text" class="form-control mb-2" id="floatingInput" placeholder="Username">
+      <input name="username" value="<?=old_value('username')?>" type="text" class="form-control mb-2" id="floatingInput" placeholder="Username">
       <label for="floatingInput">Username</label>
     </div>
+    <?php if(!empty($errors['username'])):?>
+    <div class="text-danger"><?=$errors['username']?></div>
+    <?php endif;?>
     <div class="form-floating">
-      <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <input name="email" value="<?=old_value('email')?>" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
       <label for="floatingInput">Email address</label>
     </div>
+    <?php if(!empty($errors['email'])):?>
+    <div class="text-danger"><?=$errors['email']?></div>
+    <?php endif;?>
     <div class="form-floating">
-      <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input name="password" value="<?=old_value('password')?>" type="password" class="form-control" id="floatingPassword" placeholder="Password">
       <label for="floatingPassword">Password</label>
     </div>
+    <?php if(!empty($errors['password'])):?>
+    <div class="text-danger"><?=$errors['password']?></div>
+    <?php endif;?>
     <div class="form-floating">
-      <input name="retype _password" type="password" class="form-control" id="floatingPassword" placeholder="Retype Password">
-      <label for="floatingPassword">Password</label>
+      <input name="password2" value="<?=old_value('password2')?>" type="password" class="form-control" id="floatingPassword" placeholder="password2">
+      <label for="floatingPassword">Retype Password</label>
     </div>
+    <?php if(!empty($errors['password2'])):?>
+    <div class="text-danger"><?=$errors['password2']?></div>
+    <?php endif;?>
 
     <div class="checkbox mb-3">
-    <div class="my-2">Already have an account? <a href="login">Login here!</a></div>
+    <div class="my-2">Already have an account? <a href="<?=ROOT?>/login">Login here!</a></div>
       <label>
-        <input name="accept_to_join" type="checkbox" value="1"> You accept to join our page
+        <input <?=old_checked('terms')?> value="terms" name="terms" type="checkbox" > You accept to join our page
       </label>
     </div>
+    <?php if(!empty($errors['terms'])):?>
+    <div class="text-danger"><?=$errors['terms']?></div>
+    <?php endif;?>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2023 <?php echo date("M") ?> </p>
   </form>

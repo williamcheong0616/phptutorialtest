@@ -1,3 +1,35 @@
+<?php
+  if(!empty($_POST))
+  {
+    //validate
+    $errors = [];
+    $query = "select * from users where email = :email limit 1";
+    $row = query($query,['email'=>$_POST['email']]);
+
+    if($row)
+    {
+      //save to database
+      $data = [];
+      if(password_verify($_POST['password'], $row[0]['password'])){
+        //grant access
+        authenticate($row[0]);
+        redirect('admin');
+      }    
+      else{
+        //deny access
+        $errors['email'] = 'Email or password is incorrect';
+
+      }
+    
+    }
+    else{
+      //deny access
+     $errors['email'] = 'Email or password is incorrect';
+ 
+   }
+  }
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,11 +40,7 @@
     <meta name="generator" content="William">
     <title>My Blog</title>
 
-<<<<<<< HEAD
-    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-=======
-    <link href="../../public/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
->>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
+    <link href="<?=ROOT?>/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -69,33 +97,31 @@
 
     
     <!-- Custom styles for this template -->
-<<<<<<< HEAD
-    <link href="assets/css/sign-in.css" rel="stylesheet">
-=======
-    <link href="../../public/assets/css/sign-in.css" rel="stylesheet">
->>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
+    <link href="<?=ROOT?>/assets/css/sign-in.css" rel="stylesheet">
   </head>
   <body class="text-center">
     
 <main class="form-signin w-100 m-auto">
   <form method="post">
-<<<<<<< HEAD
-    <img class="mb-4 rounded-circle shadow" src="assets/images/grcxlk13.bmp" alt="" width="120" height="120">
-=======
-    <img class="mb-4 rounded-circle shadow" src="../../public/assets/images/grcxlk13.bmp" alt="" width="120" height="120">
->>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
+    <a href="home">
+    <img class="mb-4 rounded-circle shadow" src="<?=ROOT?>/assets/images/grcxlk13.bmp" alt="" width="120" height="120">
+    </a>
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
+    <?php if(!empty($errors['email'])):?>
+      <div class="alert alert-danger"> <?=$errors['email']?> </div>
+      <?php endif;?>
+
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <input value="<?=old_value('email')?>" name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
       <label for="floatingInput">Email address</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input value="<?=old_value('password')?>" name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
       <label for="floatingPassword">Password</label>
     </div>
 
-      <div class="my-2">Don't have an account? <a href="signup">Signup here!</a></div>
+      <div class="my-2">Don't have an account? <a href="<?=ROOT?>/signup">Signup here!</a></div>
 
     <div class="checkbox mb-3">
       <label>

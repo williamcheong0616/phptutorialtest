@@ -1,3 +1,21 @@
+<?php
+
+if(!logged_in()){
+  redirect('login');
+}
+
+        
+$section = $url[1] ?? 'dashboard';
+$action  = $url[2] ?? 'view';
+$filename = "../app/pages/admin/".$section.".php";
+if(file_exists($filename)){
+  require_once $filename;
+}else{
+ require_once "../app/pages/admin/404.php";
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,13 +24,8 @@
     <meta name="description" content="">
     <title>AdminHub - MyBlog</title>
 
-<<<<<<< HEAD
-<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="assets/css/bootstrap-icons.css" rel="stylesheet">
-=======
-<link href="../../public/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="../../public/assets/css/bootstrap-icons.css" rel="stylesheet">
->>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
+<link href="<?=ROOT?>/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="<?=ROOT?>/assets/css/bootstrap-icons.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -69,23 +82,19 @@
 
     
     <!-- Custom styles for this template -->
-<<<<<<< HEAD
-    <link href="assets/css/dashboard.css" rel="stylesheet">
-=======
-    <link href="../../public/assets/css/dashboard.css" rel="stylesheet">
->>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
+    <link href="<?=ROOT?>/assets/css/dashboard.css" rel="stylesheet">
   </head>
   <body>
     
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Company name</a>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="<?=ROOT?>/admin">Company name</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="#">Sign out</a>
+      <a class="nav-link px-3" href="<?=ROOT?>/logout">Sign out</a>
     </div>
   </div>
 </header>
@@ -96,23 +105,31 @@
       <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">
+            <a class="nav-link active" aria-current="page" href="<?=ROOT?>/admin">
             <i class="bi bi-speedometer"></i>
                 Dashboard
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file" class="align-text-bottom"></span>
-              Orders
+            <a class="nav-link" aria-current="page" href="<?=ROOT?>/admin/users">
+            <i class="bi bi-person"></i>
+                Users
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="bar-chart-2" class="align-text-bottom"></span>
-              Reports
+            <a class="nav-link" aria-current="page" href="<?=ROOT?>/admin/categories">
+            <i class="bi bi-tags"></i>
+                Categories
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="<?=ROOT?>/admin/posts">
+            <i class="bi bi-file-post"></i>
+                Posts
+            </a>
+          </li>
+
+
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
@@ -147,17 +164,12 @@
           </button>
         </div>
       </div>
+
     </main>
 
-<<<<<<< HEAD
       <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <script src="assets/js/dashboard.js"></script>
-=======
-      <script src="../../public/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-        <script src="../../public/assets/js/dashboard.js"></script>
->>>>>>> 65211aaf761aa426ffa080d3be81e90bf679e9fd
 
    </body>
 </html>
