@@ -37,6 +37,8 @@
     
   </form>
   </div> 
+
+  
 <?php elseif($action == 'edit'): ?>
   <div class="col-md-6 mx-auto">
     <form method="post">
@@ -76,7 +78,9 @@
           <div class="text-danger"><?=$errors['password2']?></div>
           <?php endif;?>
           <button class="mt-4 w-100 btn btn-lg btn-primary" type="submit">Save</button>
-          <div class="alert alert-danger text-center"></div>
+
+          <div class="alert alert-danger text-center">Record not Found!</div>
+            
         </form>
   </div> 
 <?php elseif($action == 'delete'): ?>
@@ -121,10 +125,10 @@
     <td>Image</td>
     <td><?=date("jS M,Y",strtotime($row['date']))?></td>
     <td>
-    <a href="<?=ROOT?>/admin/users/edit <?=$row['id']?>"> 
+    <a href="<?=ROOT?>/admin/users/edit/<?=$row['id']?>"> 
       <button class="btn btn-warning btn-sm text-white"><i class="bi bi-pencil-square"></i></button>
     </a>
-    <a href="<?=ROOT?>/admin/users/delete <?=$row['id']?>"> 
+    <a href="<?=ROOT?>/admin/users/delete/<?=$row['id']?>"> 
       <button class="btn btn-danger btn-sm text-white"><i class="bi bi-trash-fill"></i></button>
   </a>
     </td>
