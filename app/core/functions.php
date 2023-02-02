@@ -2,22 +2,22 @@
 
 //create_tables();
 
-function query(string $query, array $data =[])
+function query(string $query, array $data = [])
 {
 
 	$string = "mysql:hostname=".DBHOST.";dbname=". DBNAME;
 	$con = new PDO($string, DBUSER, DBPASS);
 
-//	$query = "select * from users where id = ':id'";
 	$stm = $con->prepare($query);
 	$stm->execute($data);
 
-    $result = $stm->fetchAll(PDO::FETCH_ASSOC);
-    if(is_array($result) && !empty($result))
-    {
-    	return $result;
-    }
-        return false;
+	$result = $stm->fetchAll(PDO::FETCH_ASSOC);
+	if(is_array($result) && !empty($result))
+	{
+		return $result;
+	}
+
+	return false;
 
 }
 
@@ -42,7 +42,7 @@ function query_row(string $query, array $data =[])
 
 function redirect($page)
 {
-    header("Location: ".$page);
+    header('Location: '.ROOT. '/' .$page);
     die;
 }
 
@@ -78,6 +78,17 @@ function logged_in()
     return false;
 }
 
+function get_image($file)
+{
+	$file = $file ?? '';
+	if(file_exists($file))
+	{
+		return ROOT . '/' . $file;
+	}
+	return ROOT. '/assets/images/no_image.jpg';
+}
+
+
 function str_to_url($url)
 {
     $url = str_replace("'", "", $url);
@@ -107,7 +118,7 @@ function create_tables()
 	$stm = $con->prepare($query);
 	$stm->execute();
 
-	$query = "use ". DBNAME;
+	$query = "users ". DBNAME;
 	$stm = $con->prepare($query);
 	$stm->execute();
 
