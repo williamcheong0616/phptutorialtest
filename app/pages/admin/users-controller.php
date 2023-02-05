@@ -163,17 +163,24 @@ elseif($action == 'edit')
     $data['role'] = $row['role'];
     $data['id'] = $id;
 
+    if(!empty($destination))
+    {
+      $image_str = "image = :image, ";
+      $data['image']       = $destination;
+    }
+    
     if(empty($_POST['password']))
     {
-      $query = "update users set username = :username, email= :email, password = :password, role = :role where id = :id limit 1";
+      $query = "update users set username = :username, email = :email, password= :password, $image_str role = :role where id = :id limit 1";
     }
     else
     {
+      
       $data['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-      $query = "update users set username = :username, email= :email, password = :password, role = :role where id = :id limit 1";
+      $query = "update users set username = :username, email = :email, password= :password, $image_str role = :role where id = :id limit 1";
     }
 
-    $query = "update users set username = :username, email= :email, password = :password, role = :role where id = :id limit 1";
+    $query = "update users set username = :username, email = :email, password= :password, $image_str role = :role where id = :id limit 1";
     query($query, $data);
 
     redirect('admin/users');
