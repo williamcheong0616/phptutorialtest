@@ -11,26 +11,10 @@ $url = explode("/", $url);
 $page_name = trim($url[0]);
 $filename = "../app/pages/" . $page_name . ".php";
 
-// Set Page Pagination vars
+$PAGE = get_pagination_vars($page_name);
 
-$page_number = $GET['page'] ?? 1;
-$page_number = empty($page_number) ? 1 : (int)$page_number;
-
-$current_link = $_GET['url'] ?? 'home';
-$current_link = ROOT . "/" . $current_link;
-$query_string = "";
-
-foreach($_GET as $key => $value){
-        if($key != 'url')
-        $current_link .= '&' .$key. "=" .$value;
-}
-
-$query_string = trim($query_string, "&");
-if(strstr($query_string, "page=")){
-        $query_string .= "&" .$key."=".$value;
-}
-// echo $current_link;die;
-
+// echo "<pre>";
+// print_r($PAGE);die;
 
 if (file_exists($filename)) {
         require_once $filename;

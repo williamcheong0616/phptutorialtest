@@ -57,6 +57,19 @@ function old_checked($key, $default = '')
 	return '';
 }
 
+function old_select($key, $value, $default = '')
+{
+	if (!empty($_POST[$key]) && $_POST[$key] == $value) {
+
+		return " selected ";
+	}
+	if ($default == $value) {
+		
+		return " selected ";
+	}
+	return '';
+}
+
 function authenticate($row)
 {
 	$_SESSION['USER'] = $row;
@@ -77,8 +90,9 @@ function get_image($file)
 	if (file_exists($file)) {
 		return ROOT . '/' . $file;
 	}
-	return ROOT . '/assets/images/no_image.jpg';
+	return ROOT.'/assets/images/no_image.jpg';
 }
+
 
 
 function str_to_url($url)
@@ -98,30 +112,66 @@ function esc($str)
 	return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8');
 }
 
-create_tables();
+function get_pagination_vars()
+{
+		/** set pagination vars **/
+$page_number = $_GET['page'] ?? 1;
+$page_number = empty($page_number) ? 1 : (int)$page_number;
+$page_number = $page_number < 1 ? 1 : $page_number;
+
+$current_link = $_GET['url'] ?? 'home';
+$current_link = ROOT . "/" . $current_link;
+$query_string = "";
+
+foreach ($_GET as $key => $value)
+{
+        if($key != 'url')
+                $query_string .= "&".$key."=".$value;
+}
+
+if(!strstr($query_string, "page="))
+{
+        $query_string .= "&page=".$page_number;
+}
+
+$query_string = trim($query_string,"&");
+$current_link .= "?".$query_string;
+
+$current_link = preg_replace("/page=.*/", "page=".$page_number, $current_link);
+$next_link = preg_replace("/page=.*/", "page=".($page_number+1), $current_link);
+$first_link = preg_replace("/page=.*/", "page=1", $current_link);
+$prev_page_number = $page_number < 2 ? 1 : $page_number - 1;
+$prev_link = preg_replace("/page=.*/", "page=".$prev_page_number, $current_link);
+
+$result = [
+		 'current_ink' => $current_link, 
+		 'next_link' => $next_link, 
+		 'first_link' => $first_link, 
+		 'prev_link' => $prev_link, 
+		 'page_number' => $page_number, 
+		 ];
+
+return $result;
+}
+
+// create_tables();
 
 function create_tables()
 {
 
-	$string = "mysql:hostname=" . DBHOST . ";";
+	$string = "mysql:hostname=".DBHOST.";";
 	$con = new PDO($string, DBUSER, DBPASS);
 
-	try {
-		$query = "create database if not exists " . DBNAME;
-		$stm = $con->prepare($query);
-		$stm->execute();
-	} catch (PDOException $e) {
-		echo $e->getMessage();
-	}
+	$query = "create database if not exists ". DBNAME;
+	$stm = $con->prepare($query);
+	$stm->execute();
 
-	$query = "use " . DBNAME;
+	$query = "use ". DBNAME;
 	$stm = $con->prepare($query);
 	$stm->execute();
 
 	/** users table **/
-	try {
-		$query = "create table if not exists users(
-
+	$query = "create table if not exists users(
 		id int primary key auto_increment,
 		username varchar(255) not null,
 		email varchar(255) not null,
@@ -129,35 +179,26 @@ function create_tables()
 		image varchar(1024) null,
 		date datetime default current_timestamp,
 		role varchar(10) not null,
-
 		key username (username),
 		key email (email)
-
 	)";
-		$stm = $con->prepare($query);
-		$stm->execute();
-	} catch (PDOException $e) {
-		echo $e->getMessage();
-	}
+	$stm = $con->prepare($query);
+	$stm->execute();
 
 	/** categories table **/
 	$query = "create table if not exists categories(
-
 		id int primary key auto_increment,
 		category varchar(50) not null,
 		slug varchar(100) not null,
 		disabled tinyint default 0,
-
 		key slug (slug),
 		key category (category)
-
 	)";
 	$stm = $con->prepare($query);
 	$stm->execute();
 
 	/** posts table **/
 	$query = "create table if not exists posts(
-
 		id int primary key auto_increment,
 		user_id int,
 		category_id int,
@@ -166,14 +207,85 @@ function create_tables()
 		image varchar(1024) null,
 		date datetime default current_timestamp,
 		slug varchar(100) not null,
-
 		key user_id (user_id),
 		key category_id (category_id),
 		key title (title),
 		key slug (slug),
 		key date (date)
-
 	)";
 	$stm = $con->prepare($query);
 	$stm->execute();
+
+
+}
+function resize_image($filename,$max_size = 1000)
+{
+	$filename = 'uploads/1675579126DSC_3054a.jpg';
+
+	if(!file_exists($filename))
+	{
+		$type = mime_content_type($filename);
+		switch($type)
+		{
+			case 'image/jpeg':
+				$image = imagecreatefromjpeg($filename);
+				break;				
+			case 'image/png':
+				$image = imagecreatefrompng($filename);
+				break;
+			case 'image/gif':
+				$image = imagecreatefromgif($filename);
+				break;
+			case 'image/webp':
+				$image = imagecreatefromwebp($filename);
+				break;				
+			default:
+				return false;
+		}
+
+		$src_width = imagesx($image);
+		$src_height = imagesy($image);
+
+		if($src_width > $src_height)
+		{
+			if($src_width < $max_size)
+			{
+				$max_size = $src_width;
+			}
+			$dst_width  = $max_size;
+			$dst_height = ($src_height / $src_width) * $max_size;
+		}
+		else{
+			if($src_height < $max_size)
+			{
+				$max_size = $src_height;
+			}
+			$dst_height = $max_size;
+			$dst_width  = ($src_width / $src_height) * $max_size;
+		}
+
+		$dst_height = round($dst_height);
+		$dst_width  = round($dst_width);
+
+		$dst_image = imagecreatetruecolor($dst_width, $dst_height);
+		imagecopyresampled($dst_image, $image, 0, 0, 0, 0, $dst_width, $dst_height, $src_width, $src_height);
+
+		switch($type)
+		{
+			case 'image/jpeg':
+				imagejpeg($dst_image, $filename, 100);
+				break;				
+			case 'image/png':
+				imagepng($dst_image, $filename, 100);
+				break;
+			case 'image/gif':
+				imagegif($dst_image, $filename, 100);
+				break;
+			case 'image/webp':
+				imagewebp($dst_image, $filename, 100);
+				break;				
+			default:
+				return false;
+		}
+	}	
 }
