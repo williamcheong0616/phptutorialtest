@@ -29,7 +29,7 @@ $query_string = trim($query_string, "&");
 if(strstr($query_string, "page=")){
         $query_string .= "&" .$key."=".$value;
 }
-echo $current_link;die;
+// echo $current_link;die;
 
 
 if (file_exists($filename)) {
