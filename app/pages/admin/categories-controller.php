@@ -21,7 +21,7 @@ if($action == 'add')
 
   $slug = str_to_url($_POST['category']);
 
-  //validate email
+  //validate categoriesl
 $query = "select id from categories where slug = :slug limit 1";
 $slug = query($query, ['slug'=>$slug]);
 
