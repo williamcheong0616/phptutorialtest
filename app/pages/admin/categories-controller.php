@@ -15,9 +15,8 @@ if ($action == 'add') {
 
     $slug = str_to_url($_POST['category']);
 
-  //validate email
-$query = "select id from categories where slug = :slug limit 1";
-$slug = query($query, ['slug'=>$slug]);
+    $query = "select id from categories where slug = :slug limit 1";
+    $slug_row = query($query, ['slug' => $slug]);
 
     if ($slug_row) {
       $slug .= rand(1000, 9999);
