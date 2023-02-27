@@ -75,6 +75,19 @@ function authenticate($row)
 	$_SESSION['USER'] = $row;
 }
 
+function user($key = '')
+{
+	if(empty($key)){
+		return $_SESSION['USER'];
+	}
+	if(!empty($_SESSION['USER'][$key])){
+		return $_SESSION['USER'][$key] ;
+	}
+
+	return '';
+}
+
+
 function logged_in()
 {
 	if (!empty($_SESSION['USER'])) {
@@ -218,9 +231,10 @@ function create_tables()
 
 
 }
+
 function resize_image($filename,$max_size = 1000)
 {
-	$filename = 'uploads/1675579126DSC_3054a.jpg';
+	$filename = 'uploads/'.$filename;
 
 	if(!file_exists($filename))
 	{
