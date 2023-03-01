@@ -9,6 +9,10 @@
     <title>Home - <?=APP_NAME?></title>
 
     <style>
+
+      body{
+        overflow-x: hidden;
+      }
         .bi{
             vertical-align: -.125em;
             fill: currentColor;
@@ -76,7 +80,6 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="<?=ROOT?>" class="nav-link px-2 <?=$url[0] =='home' ? 'link-primary':'link-dark'?>">Home</a></li>
           <li><a href="<?=ROOT?>/blog" class="nav-link px-2  <?=$url[0] =='blog' ? 'link-primary':'link-dark'?>">Blog</a></li>
-          <li><a href="<?=ROOT?>/search" class="nav-link px-2  <?=$url[0] =='search' ? 'link-primary':'link-dark'?>">Search</a></li>
           <li><a href="<?=ROOT?>/contact" class="nav-link px-2  <?=$url[0] =='contact' ? 'link-primary':'link-dark'?>">Contact</a></li>
           <li>
             <span class="nav-link px-2 link-dark dropdown text-end">
@@ -108,8 +111,7 @@
             <input value="<?=$_GET['find'] ?? ''?>" name="find" type="search" class="form-control" placeholder="Search..." aria-label="Search">
             <button class="btn btn-primary">Find</button>
           </div>
-        </form>
-
+        </form> 
         <?php if(!logged_in()):?>
         <div class="dropdown text-end">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

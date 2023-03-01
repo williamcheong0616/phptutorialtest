@@ -50,7 +50,7 @@
     </div>
 
     <div class="d-flex flex-column flex-sm-row justify-content-between py-4 mt-2 border-top">
-      <p>&copy; 2022 Company, Inc. All rights reserved.</p>
+      <p>&copy; 2023 TARUMT Chinese Orchestra. All rights reserved.</p>
       <ul class="list-unstyled d-flex">
         <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
         <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
