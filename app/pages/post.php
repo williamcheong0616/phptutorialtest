@@ -28,8 +28,11 @@
               <div class="col p-4 d-flex flex-column position-static">
                 <strong class="d-inline-block mb-2 text-primary"><?=esc($row['category'] ?? 'Unknown')?></strong>
                 <h3 class="mb-0"><?=esc($row['title'])?></h3>
-                <div class="mb-1 text-muted"><?=date("jS M, Y",strtotime($row['date']))?></div>
+                <div class="mb-1 text-muted"><?=date("jS M, Y",strtotime($row['date']))?>
+                <p class="card-text mb-auto"> <?=nl2br(esc($row['content']))?></p>
               </div>
+              </div>
+
             </div>
           </div>
 

@@ -79,6 +79,7 @@
 
 
 <?php elseif ($action == 'edit') : ?>
+
 	<div class="col-md-12 mx-auto">
 	  <form method="post" enctype="multipart/form-data">
 
@@ -157,6 +158,7 @@
 		<?php endif;?>
     </form>
   </div>
+
   <?php elseif($action == 'delete'):?>
 
 <div class="col-md-6 mx-auto">

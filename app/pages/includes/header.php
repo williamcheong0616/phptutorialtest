@@ -38,7 +38,7 @@
 
 <link href=" <?=ROOT?>/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?=ROOT?>/assets/css/bootstrap-icons.css" rel="stylesheet">
-
+<script src="<?=ROOT?>/assets/js/bootstrap.min.js"></script>
 
     <!-- Custom styles for this template -->
     <link href="<?=ROOT?>/assets/css/headers.css" rel="stylesheet">
@@ -80,7 +80,7 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="<?=ROOT?>" class="nav-link px-2 <?=$url[0] =='home' ? 'link-primary':'link-dark'?>">Home</a></li>
           <li><a href="<?=ROOT?>/blog" class="nav-link px-2  <?=$url[0] =='blog' ? 'link-primary':'link-dark'?>">Blog</a></li>
-          <li><a href="<?=ROOT?>/contact" class="nav-link px-2  <?=$url[0] =='contact' ? 'link-primary':'link-dark'?>">Contact</a></li>
+          <li><a href="<?=ROOT?>/aboutus" class="nav-link px-2  <?=$url[0] =='aboutus' ? 'link-primary':'link-dark'?>">About Us</a></li>
           <li>
             <span class="nav-link px-2 link-dark dropdown text-end">
               <a href="#" class="d-block <?=$url[0] =='category' ? 'link-primary':'link-dark'?> text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -112,30 +112,52 @@
             <button class="btn btn-primary">Find</button>
           </div>
         </form> 
-        <?php if(!logged_in()):?>
-        <div class="dropdown text-end">
-          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="<?=get_image(user('image'))?>" alt="mdo" style="object-fit: cover;" width="32" height="32" class="rounded-circle">
-          </a>
-          <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="<?=ROOT?>/login">Login</a></li>
-          </ul>
-        </div>
-        <?php elseif(logged_in()):?>
-        <div class="dropdown text-end">
-          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="<?=get_image(user('image'))?>" alt="mdo" style="object-fit: cover;" width="32" height="32" class="rounded-circle">
-          </a>
-          <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="#">Hi, <?=user('username')?></a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="<?=ROOT?>/admin">Admin</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="<?=ROOT?>/logout">Sign out</a></li>
-          </ul>
-        </div>
-        <?php endif;?>
+<?php if (!logged_in()): ?>
+  <div class="dropdown text-end">
+    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="<?=get_image(user('image'))?>" alt="mdo" style="object-fit: cover;" width="32" height="32" class="rounded-circle">
+    </a>
+    <ul class="dropdown-menu text-small">
+      <li><a class="dropdown-item" href="<?=ROOT?>/login">Login</a></li>
+    </ul>
+  </div>
+<?php elseif (logged_in()): ?>
+ 
+
+ <?php
+  //  implode($data = []);
+   $role = query("select role from users where id = {$_SESSION['USER']['id']}")[0]['role'];
+   ?>
+
+  <?php if ($role === 'admin'): ?>
+    <div class="dropdown text-end">
+      <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="<?=get_image(user('image'))?>" alt="mdo" style="object-fit: cover;" width="32" height="32" class="rounded-circle">
+      </a>
+      <ul class="dropdown-menu text-small">
+        <li><a class="dropdown-item" href="profile/profile_page">Hi, <?=user('username')?></a></li>
+        <li><a class="dropdown-item" href="profile/profile_page">Profile</a></li>
+        <li><a class="dropdown-item" href="<?=ROOT?>/admin">Admin</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="<?=ROOT?>/logout">Sign out</a></li>
+      </ul>
+    </div>
+  <?php else: ?>
+    <div class="dropdown text-end">
+      <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="<?=get_image(user('image'))?>" alt="mdo" style="object-fit: cover;" width="32" height="32" class="rounded-circle">
+      </a>
+      <ul class="dropdown-menu text-small">
+        <li><a class="dropdown-item" href="profile">Hi, <?=user('username')?></a></li>
+        <li><a class="dropdown-item" href="profile">Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="<?=ROOT?>/logout">Sign out</a></li>
+      </ul>
+    </div>
+  <?php endif; ?>
+<?php endif; ?>
+
+
 
       </div>
     </div>

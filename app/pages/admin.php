@@ -1,7 +1,7 @@
 <?php
 
-if (!logged_in()) {
-  redirect('login');
+if (logged_in() && user('role') == 'user') {
+  redirect('home');
 }
 
     $section = $url[1] ?? 'dashboard';       
