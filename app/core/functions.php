@@ -24,7 +24,7 @@ function query_row(string $query, array $data = [])
 	$string = "mysql:hostname=" . DBHOST . ";dbname=" . DBNAME;
 	$con = new PDO($string, DBUSER, DBPASS);
 
-	//	$query = "select * from users where id = ':id'";
+		$query = "select * from users where id = ':id'";
 	$stm = $con->prepare($query);
 	$stm->execute($data);
 
@@ -34,6 +34,27 @@ function query_row(string $query, array $data = [])
 	}
 	return false;
 }
+
+function db_query(string $query, array $data = array())
+{
+	$string = "mysql:hostname=" . DBHOST . ";dbname=" . DBNAME;
+	$con = new PDO($string, 'root', '');
+
+	$stm = $con->prepare($query);
+	$check = $stm->execute($data);
+
+	if($check)
+	{
+		$res = $stm->fetchAll(PDO::FETCH_ASSOC);
+		if(is_array($res) && !empty($res))
+		{
+			return $res;
+		} 
+	}
+
+	return false;
+}
+
 
 function redirect($page)
 {
