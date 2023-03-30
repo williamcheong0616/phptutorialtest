@@ -148,8 +148,8 @@
         <img src="<?=get_image(user('image'))?>" alt="mdo" style="object-fit: cover;" width="32" height="32" class="rounded-circle">
       </a>
       <ul class="dropdown-menu text-small">
-        <li><a class="dropdown-item" href="profile">Hi, <?=user('username')?></a></li>
-        <li><a class="dropdown-item" href="profile">Profile</a></li>
+        <li><a class="dropdown-item" href="profile/profile_page">Hi, <?=user('username')?></a></li>
+        <li><a class="dropdown-item" href="profile/profile_page">Profile</a></li>
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="<?=ROOT?>/logout">Sign out</a></li>
       </ul>

@@ -3,7 +3,7 @@
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src="<?=get_image(user('image'))?>" alt="Admin" class="rounded-circle" width="150">
+                    <img src="<?=get_image(user('image'))?>" alt="Admin" class="rounded-circle" width="200" height="200">
                     <div class="mt-3">
                       <h4><?=user('username')?></h4>
                       <p class="text-secondary mb-1"><?=user('email')?></p>

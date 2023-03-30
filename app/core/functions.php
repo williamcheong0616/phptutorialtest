@@ -24,7 +24,7 @@ function query_row(string $query, array $data = [])
 	$string = "mysql:hostname=" . DBHOST . ";dbname=" . DBNAME;
 	$con = new PDO($string, DBUSER, DBPASS);
 
-		$query = "select * from users where id = ':id'";
+	// $query = "select * from users where id = ':id'";
 	$stm = $con->prepare($query);
 	$stm->execute($data);
 

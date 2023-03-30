@@ -17,26 +17,28 @@ if ($row) {
 
 
 <?php if (!empty($row)): ?>
+	<div class="d-flex justify-content-center mx-auto">
 
-	<div class="row col-md-12">
-		<div class="col-md-4 text-center">
-			<img src="<?= get_image($row['image']) ?>" class="js-image img-fluid rounded"
-				style="width: 180px;height:180px;object-fit: cover;">
-			<div>
-				<div class="mb-3">
-					<label for="formFile" class="form-label">Click below to select an image</label>
-					<input onchange="display_image(this.files[0])" class="js-image-input form-control" type="file"
-						id="formFile">
-				</div>
-				<div><small class="js-error js-error-image text-danger"></small></div>
-			</div>
-		</div>
-		<div class="col-md-8">
+		<div class="row col-md-8">
 
-			<div class="h2">Edit Profile</div>
+			<div class="h2 d-flex text-center">Edit Profile</div>
 
 			<form method="post" onsubmit="myaction.collect_data(event, 'profile-edit')">
 				<table class="table table-striped">
+					<tr>
+						<div class="col-md-6 text-center">
+							<div class="my-2">
+								<label class="d-block image-preview-edit">
+									<img class="mx-auto d-block js-image-edit" src="<?= get_image($row['image']) ?>"
+										style="cursor: pointer;" width="150px" height="150px"
+										class="rounded-circle object-fit-cover" alt="...">
+									<input onchange="display_image_edit(this.files[0]);" type="file" name="image"
+										class="d-none js-image-input-edit">
+								</label>
+							</div>
+						</div>
+
+						<div class="col-md-8">
 					<tr>
 						<th colspan="2">User Details:</th>
 					</tr>
@@ -92,6 +94,7 @@ if ($row) {
 		</div>
 	</div>
 
+
 <?php else: ?>
 	<div class="text-center alert alert-danger">That profile was not found</div>
 	<a href="index.php">
@@ -102,15 +105,13 @@ if ($row) {
 
 <script>
 
-	var image_added = false;
-
-	function display_image(file) {
-		var img = document.querySelector(".js-image");
-		img.src = URL.createObjectURL(file);
-
-		image_added = true;
+	function display_image_edit(file) {
+		var reader = new FileReader();
+		reader.onload = function (e) {
+			document.querySelector('.js-image-edit').src = e.target.result;
+		}
+		reader.readAsDataURL(file);
 	}
-
 	var myaction =
 	{
 		collect_data: function (e, data_type) {
@@ -122,7 +123,6 @@ if ($row) {
 			myform.append('data_type', data_type);
 
 			for (var i = 0; i < inputs.length; i++) {
-
 				myform.append(inputs[i].name, inputs[i].value);
 			}
 
@@ -169,7 +169,7 @@ if ($row) {
 				document.querySelector(".progress-bar").innerHTML = "Working..." + percent + "%";
 			});
 
-			ajax.open('post', 'ajax.php', true);
+			ajax.open('post', 'ajax', true);
 			ajax.send(form);
 		},
 
@@ -196,5 +196,7 @@ if ($row) {
 			}
 		}
 	};
+
+
 
 </script>
