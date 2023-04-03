@@ -39,52 +39,7 @@ if (!empty($_POST)) {
         $errors['password2'] = 'Password does not match';
       }
 
-    // //validate image
-    // $allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
-    // if (!empty($_FILES['image']['name'])) {
-    //   $destination = "";
-    //   if (!in_array($_FILES['image']['type'], $allowed)) {
-    //     $errors['image'] = "File type not supported/allowed";
-    //   } else {
-
-    //     $folder = "uploads/";
-    //     if (!file_exists($folder)) {
-    //       mkdir($folder, 0777, true);
-    //     }
-
-    //     $destination = $folder . time() . $_FILES['image']['name'];
-    //     move_uploaded_file($_FILES['image']['tmp_name'], $destination);
-    //     resize_image($destination);
-
-    //     $data['image'] = file_get_contents($destination); // or use $destination for storing file path in database
-    //   }
-    // }
-
-    //validate image
-    $allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
-    if (!empty($_FILES['image']['name'])) {
-      $destination = "";
-      if (!in_array($_FILES['image']['type'], $allowed)) {
-        $errors['image'] = "File type not supported/allowed";
-      } else {
-
-        $folder = "uploads/";
-        if (!file_exists($folder)) {
-          mkdir($folder, 0777, true);
-        }
-
-        $destination = $folder . time() . $_FILES['image']['name'];
-        move_uploaded_file($_FILES['image']['tmp_name'], $destination);
-        resize_image($destination);
-
-        $data['image_path'] = $destination; // store file path in database
-
-        // get file contents to send in ajax request
-        $data['image'] = file_get_contents($destination);
-      }
-    }
-
-
+  
 
     if (empty($errors)) {
       // Update user information in the database
@@ -94,11 +49,6 @@ if (!empty($_POST)) {
         'id' => $_SESSION['USER']['id']
       );
 
-      if (!empty($data['image'])) {
-        $image_str = ', image = :image';
-      } else {
-        $image_str = '';
-      }
 
       if (!empty($_POST['password'])) {
         $data['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -126,7 +76,6 @@ if ($query) {
   // Update username in session and display a message
   $_SESSION['USER']['username'] = $_POST['username'];
   $_SESSION['USER']['email'] = $_POST['email'];
-  $_SESSION['USER']['image'] = $_POST['image'];
 
   // Success! Inform user and refresh page after 5 seconds
   echo '<script>';

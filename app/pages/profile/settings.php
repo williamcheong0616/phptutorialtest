@@ -7,6 +7,13 @@
             <div class="card-body">
                 <div class="d-flex flex-column align-items-center text-center">
                     <img src="<?= get_image(user('image')) ?>" alt="Admin" class="rounded-circle" width="150">
+                    <div class="col-12">
+                        <br>
+                        <a href="<?=ROOT?>/profile/profile-picture">
+                        <button class="btn btn-primary btn-sm" type="button">Edit
+                            Profile Picture</button>
+                            </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,8 +46,9 @@
                             data-bs-target="#editProfile">Edit
                             Profile</button>
                             </a>
+                            <a href="<?=ROOT?>/profile/profile-delete">
                         <button class="btn btn-danger btn-sm ">Delete Account</button>
-
+                        </a>
 
 
 

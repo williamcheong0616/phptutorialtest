@@ -154,7 +154,7 @@
 <main class="form-signin w-100 m-auto">
   <form method="post">
   <a href="home">
-    <img class="mb-4 rounded-circle shadow" src="<?=ROOT?>/assets/images/grcxlk13.bmp" alt="" width="120" height="120">
+    <img class="mb-4 rounded-circle shadow" src="<?=ROOT?>/assets/images/logo.jpg" alt="" width="120" height="120">
     </a>
     <h1 class="h3 mb-3 fw-normal">Create An Account!</h1>
     <?php if(!empty($errors)):?>
@@ -192,7 +192,7 @@
     <div class="checkbox mb-3">
     <div class="my-2">Already have an account? <a href="<?=ROOT?>/login">Login here!</a></div>
       <label>
-        <input <?=old_checked('terms')?> value="terms" name="terms" type="checkbox" > You accept to join our page
+        <input <?=old_checked('terms')?> value="terms" name="terms" type="checkbox" > You accept <a href="terms" target="_blank">Terms</a> to join our page
       </label>
     </div>
     <?php if(!empty($errors['terms'])):?>

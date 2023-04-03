@@ -19,26 +19,13 @@ if ($row) {
 <?php if (!empty($row)): ?>
 	<div class="d-flex justify-content-center mx-auto">
 
-		<div class="row col-md-8">
+		<div class="row col-md-12">
 
 			<div class="h2 d-flex text-center">Edit Profile</div>
 
 			<form method="post" onsubmit="myaction.collect_data(event, 'profile-edit')">
 				<table class="table table-striped">
-					<tr>
-						<div class="col-md-6 text-center">
-							<div class="my-2">
-								<label class="d-block image-preview-edit">
-									<img class="mx-auto d-block js-image-edit" src="<?= get_image($row['image']) ?>"
-										style="cursor: pointer;" width="150px" height="150px"
-										class="rounded-circle object-fit-cover" alt="...">
-									<input onchange="display_image_edit(this.files[0]);" type="file" name="image"
-										class="d-none js-image-input-edit">
-								</label>
-							</div>
-						</div>
-
-						<div class="col-md-8">
+						<div class="col-md-12">
 					<tr>
 						<th colspan="2">User Details:</th>
 					</tr>
@@ -126,9 +113,9 @@ if ($row) {
 				myform.append(inputs[i].name, inputs[i].value);
 			}
 
-			if (image_added) {
-				myform.append('image', document.querySelector('.js-image-input').files[0]);
-			}
+			// if (image_added) {
+			// 	myform.append('image', document.querySelector('.js-image-input').files[0]);
+			// }
 
 			myaction.send_data(myform);
 		},

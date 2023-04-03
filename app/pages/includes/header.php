@@ -3,9 +3,6 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.108.0">
     <title>Home - <?=APP_NAME?></title>
 
     <style>
@@ -74,12 +71,12 @@
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="<?=ROOT?>/home" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-          <img class="bi me-2" src="<?=ROOT?>/assets/images/grcxlk13.bmp" alt="logo" style="object-fit:cover; border-radius:10px;" width="60" height="60" role="img">
+          <img class="bi me-2" src="<?=ROOT?>/assets/images/logo.jpg" alt="logo" style="object-fit:cover; border-radius:10px;" width="60" height="60" role="img">
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="<?=ROOT?>" class="nav-link px-2 <?=$url[0] =='home' ? 'link-primary':'link-dark'?>">Home</a></li>
-          <li><a href="<?=ROOT?>/blog" class="nav-link px-2  <?=$url[0] =='blog' ? 'link-primary':'link-dark'?>">Blog</a></li>
+          <li><a href="<?=ROOT?>/blog" class="nav-link px-2  <?=$url[0] =='blog' ? 'link-primary':'link-dark'?>">Blogs & Events</a></li>
           <li><a href="<?=ROOT?>/aboutus" class="nav-link px-2  <?=$url[0] =='aboutus' ? 'link-primary':'link-dark'?>">About Us</a></li>
           <li>
             <span class="nav-link px-2 link-dark dropdown text-end">

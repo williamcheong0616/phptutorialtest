@@ -255,7 +255,7 @@ function create_tables()
 
 function resize_image($filename,$max_size = 1000)
 {
-	$filename = 'uploads/'.$filename;
+	$filename = 'uploads/';
 
 	if(!file_exists($filename))
 	{
